@@ -1,20 +1,23 @@
-const { readFileSync,readFile } = require('fs');
+const fs = require('fs');
 
-readFile('./text/new.txt',(err,data)=>{  //non-blocking 
-    if(err)throw err 
-    else{
-        console.log(`Async data: ${data.toString()}`);
-    }
-})
+// Sync
 
+console.log('+++++++++');
 
+const data = fs.readFileSync('hello.txt', 'utf-8');
+console.log(data);
 
-const data = readFileSync('./text/content.txt');  //blocking
+console.log('----------');
 
-console.log(`sync data: ${data.toString()}`);
+// Async
 
-console.log('running sucessfully!');
+console.log('+++++++++++');
 
-
-
-
+fs.readFile('hello.txt', { encoding: 'utf8' }, (err, data) => {
+  if (err) {
+    throw err;
+  } else {
+    console.log(data);
+  }
+});
+console.log('-----------');
